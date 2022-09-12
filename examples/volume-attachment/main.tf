@@ -5,7 +5,7 @@ provider "aws" {
 locals {
   availability_zone = "${local.region}a"
   name              = "example-ec2-volume-attachment"
-  region            = "us-east-1"
+  region            = "us-east-2"
   tags = {
     Owner       = "user"
     Environment = "dev"
