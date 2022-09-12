@@ -4,7 +4,7 @@ provider "aws" {
 
 locals {
   name   = "example-ec2-complete"
-  region = "eu-west-1"
+  region = "us-west-1"
 
   user_data = <<-EOT
   #!/bin/bash
@@ -33,7 +33,7 @@ module "ec2_complete" {
   name = local.name
 
   ami                         = data.aws_ami.amazon_linux.id
-  instance_type               = "c5.4xlarge"
+  instance_type               = "t3.micro"
   availability_zone           = element(module.vpc.azs, 0)
   subnet_id                   = element(module.vpc.private_subnets, 0)
   vpc_security_group_ids      = [module.security_group.security_group_id]
@@ -57,7 +57,7 @@ module "ec2_complete" {
       encrypted   = true
       volume_type = "gp3"
       throughput  = 200
-      volume_size = 50
+      volume_size = 8
       tags = {
         Name = "my-root-block"
       }
@@ -84,7 +84,7 @@ module "ec2_network_interface" {
   name = "${local.name}-network-interface"
 
   ami           = data.aws_ami.amazon_linux.id
-  instance_type = "c5.large"
+  instance_type = "t3.medium"
 
   network_interface = [
     {
@@ -103,7 +103,7 @@ module "ec2_metadata_options" {
   name = "${local.name}-metadata-options"
 
   ami                    = data.aws_ami.amazon_linux.id
-  instance_type          = "c5.4xlarge"
+  instance_type          = "t3.medium"
   subnet_id              = element(module.vpc.private_subnets, 0)
   vpc_security_group_ids = [module.security_group.security_group_id]
 
@@ -162,7 +162,7 @@ locals {
           encrypted   = true
           volume_type = "gp3"
           throughput  = 200
-          volume_size = 50
+          volume_size = 8
           tags = {
             Name = "my-root-block"
           }
@@ -177,7 +177,7 @@ locals {
         {
           encrypted   = true
           volume_type = "gp2"
-          volume_size = 50
+          volume_size = 8
         }
       ]
     }
@@ -243,7 +243,7 @@ module "ec2_spot_instance" {
       encrypted   = true
       volume_type = "gp3"
       throughput  = 200
-      volume_size = 50
+      volume_size = 8
       tags = {
         Name = "my-root-block"
       }
