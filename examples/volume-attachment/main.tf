@@ -75,15 +75,15 @@ module "ec2" {
   tags = local.tags
 }
 
-resource "aws_volume_attachment" "this" {
-  device_name = "/dev/sdh"
-  volume_id   = aws_ebs_volume.this.id
-  instance_id = module.ec2.id
-}
+# resource "aws_volume_attachment" "this" {
+#   device_name = "/dev/sdh"
+#   volume_id   = aws_ebs_volume.this.id
+#   instance_id = module.ec2.id
+# }
 
-resource "aws_ebs_volume" "this" {
-  availability_zone = local.availability_zone
-  size              = 1
+# resource "aws_ebs_volume" "this" {
+#   availability_zone = local.availability_zone
+#   size              = 1
 
-  tags = local.tags
-}
+#   tags = local.tags
+# }
